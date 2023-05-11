@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 public class FireHardwareMap {
@@ -15,15 +16,15 @@ public class FireHardwareMap {
 
 
     //Hardware Map object
-    com.qualcomm.robotcore.hardware.HardwareMap hardwareMap = null;
+    HardwareMap hardwareMap = null;
 
     public ElapsedTime runtime = new ElapsedTime();
 
-    public FireHardwareMap(com.qualcomm.robotcore.hardware.HardwareMap hwMap){
+    public FireHardwareMap(HardwareMap hwMap){
         initialize(hwMap);
     }
 
-    private void initialize(com.qualcomm.robotcore.hardware.HardwareMap hwMap){
+    private void initialize(HardwareMap hwMap){
         hardwareMap = hwMap;
         //the name of device should change based on name
         frontRightMotor = hardwareMap.get(DcMotor.class, "frontRightMotor");
