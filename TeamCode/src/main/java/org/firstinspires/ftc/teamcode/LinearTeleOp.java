@@ -41,15 +41,11 @@ public class LinearTeleOp extends LinearOpMode {
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
             double max;
-            double i =0.0;
+            double i = 0.0;
+
             if(gamepad1.a){
-
-               i = 0.5;
-
-
-
-            }
-            else{
+                i = 0.5;
+            } else {
                 i = 0.0;
             }
 
@@ -78,11 +74,11 @@ public class LinearTeleOp extends LinearOpMode {
                 leftBackPower   /= max;
                 rightBackPower  /= max;
             }
+
             leftFrontPower  /= 2;
             rightFrontPower /= 2;
             leftBackPower   /= 2;
             rightBackPower  /= 2;
-
 
 
             // Send calculated power to wheels
