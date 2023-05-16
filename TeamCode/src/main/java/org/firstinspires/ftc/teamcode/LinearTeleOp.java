@@ -1,6 +1,11 @@
 package org.firstinspires.ftc.teamcode;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.PwmControl;
+import com.qualcomm.robotcore.hardware.ServoImplEx;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 /**
@@ -41,13 +46,8 @@ public class LinearTeleOp extends LinearOpMode {
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
             double max;
-            double i = 0.0;
+            double i =0.0;
 
-            if(gamepad1.a){
-                i = 0.5;
-            } else {
-                i = 0.0;
-            }
 
             HW.leftHex.setPower(i);
             // POV Mode uses left joystick to go forward & strafe, and right joystick to rotate.
@@ -55,12 +55,14 @@ public class LinearTeleOp extends LinearOpMode {
             double lateral =  gamepad1.left_stick_x * 1.1;
             double yaw     =  gamepad1.right_stick_x;
 
+            double axial1   = -gamepad2.left_stick_y;
             // Combine the joystick requests for each axis-motion to determine each wheel's power.
             // Set up a variable for each drive wheel to save the power level for telemetry.
             double leftFrontPower  = axial + lateral + yaw;
             double rightFrontPower = axial - lateral - yaw;
             double leftBackPower   = axial - lateral + yaw;
             double rightBackPower  = axial + lateral - yaw;
+
 
             // Normalize the values so no wheel power exceeds 100%
             // This ensures that the robot maintains the desired motion.
@@ -73,25 +75,39 @@ public class LinearTeleOp extends LinearOpMode {
                 rightFrontPower /= max;
                 leftBackPower   /= max;
                 rightBackPower  /= max;
+                axial1 /=max;
+            }
+            if(gamepad1.right_bumper){
+
+                i = 0.8;
+
+
+
+            }
+            else{
+                leftFrontPower  /= 2;
+                rightFrontPower /= 2;
+                leftBackPower   /= 2;
+                rightBackPower  /= 2;
             }
 
-            leftFrontPower  /= 2;
-            rightFrontPower /= 2;
-            leftBackPower   /= 2;
-            rightBackPower  /= 2;
+
 
 
             // Send calculated power to wheels
-            HW.frontLeftMotor.setPower(leftFrontPower);
-            HW.frontRightMotor.setPower(rightFrontPower);
-            HW.backLeftMotor.setPower(leftBackPower);
-            HW.backRightMotor.setPower(rightBackPower);
+            HW.FrontLeftMotor.setPower(leftFrontPower);
+            HW.FrontRightMotor.setPower(rightFrontPower);
+            HW.BackLeftMotor.setPower(leftBackPower);
+            HW.BackRightMotor.setPower(rightBackPower);
+
+
+            HW.leftHex.setPower(axial1);
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("Front left/Right", "%4.2f, %4.2f", leftFrontPower, rightFrontPower);
             telemetry.addData("Back  left/Right", "%4.2f, %4.2f", leftBackPower, rightBackPower);
-            telemetry.addData("Servo  left/Right", "%4.2f, %4.2f", i, -i);
+            telemetry.addData("Servo  left/Right", "%4.2f, %4.2f", axial1, axial1);
             telemetry.update();
         }
     }}
