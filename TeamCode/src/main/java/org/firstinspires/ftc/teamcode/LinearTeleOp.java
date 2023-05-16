@@ -1,11 +1,6 @@
 package org.firstinspires.ftc.teamcode;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.PwmControl;
-import com.qualcomm.robotcore.hardware.ServoImplEx;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 /**
@@ -95,10 +90,10 @@ public class LinearTeleOp extends LinearOpMode {
 
 
             // Send calculated power to wheels
-            HW.FrontLeftMotor.setPower(leftFrontPower);
-            HW.FrontRightMotor.setPower(rightFrontPower);
-            HW.BackLeftMotor.setPower(leftBackPower);
-            HW.BackRightMotor.setPower(rightBackPower);
+            HW.frontLeftMotor.setPower(leftFrontPower);
+            HW.frontRightMotor.setPower(rightFrontPower);
+            HW.backLeftMotor.setPower(leftBackPower);
+            HW.backRightMotor.setPower(rightBackPower);
 
 
             HW.leftHex.setPower(axial1);

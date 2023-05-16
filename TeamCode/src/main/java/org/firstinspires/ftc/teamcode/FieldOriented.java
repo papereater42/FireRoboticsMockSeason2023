@@ -1,11 +1,6 @@
 package org.firstinspires.ftc.teamcode;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.PwmControl;
-import com.qualcomm.robotcore.hardware.ServoImplEx;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
@@ -81,10 +76,10 @@ public class FieldOriented extends LinearOpMode {
                 backRightPower /= maxPower;
             }
 
-            robot.FrontLeftMotor.setPower(frontLeftPower * maxMotorSpeed);
-            robot.FrontRightMotor.setPower(frontRightPower * maxMotorSpeed);
-            robot.BackRightMotor.setPower(backRightPower * maxMotorSpeed);
-            robot.BackLeftMotor.setPower(backLeftPower * maxMotorSpeed);
+            robot.frontLeftMotor.setPower(frontLeftPower * maxMotorSpeed);
+            robot.frontRightMotor.setPower(frontRightPower * maxMotorSpeed);
+            robot.backRightMotor.setPower(backRightPower * maxMotorSpeed);
+            robot.backLeftMotor.setPower(backLeftPower * maxMotorSpeed);
 
 
 
@@ -106,10 +101,10 @@ public class FieldOriented extends LinearOpMode {
 
 
             //TODO: Telemetry
-            telemetry.addData("Front Left Motor Power: ", robot.FrontLeftMotor.getPower());
-            telemetry.addData("Front Right Motor Power: ", robot.FrontRightMotor.getPower());
-            telemetry.addData("Back Left Motor Power: ", robot.BackLeftMotor.getPower());
-            telemetry.addData("Back Right Motor Power: ", robot.BackRightMotor.getPower());
+            telemetry.addData("Front Left Motor Power: ", robot.frontLeftMotor.getPower());
+            telemetry.addData("Front Right Motor Power: ", robot.frontRightMotor.getPower());
+            telemetry.addData("Back Left Motor Power: ", robot.backLeftMotor.getPower());
+            telemetry.addData("Back Right Motor Power: ", robot.backRightMotor.getPower());
 
 
 

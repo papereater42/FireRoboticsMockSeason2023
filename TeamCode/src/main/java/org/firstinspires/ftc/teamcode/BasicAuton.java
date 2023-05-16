@@ -29,10 +29,10 @@ public class BasicAuton extends LinearOpMode {
         backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        frontRightMotor.setTargetPosition(2000);
-        frontLeftMotor.setTargetPosition(2000);
-        backRightMotor.setTargetPosition(2000);
-        backLeftMotor.setTargetPosition(2000);
+        frontRightMotor.setTargetPosition(750);
+        frontLeftMotor.setTargetPosition(750);
+        backRightMotor.setTargetPosition(750);
+        backLeftMotor.setTargetPosition(750);
 
         frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
