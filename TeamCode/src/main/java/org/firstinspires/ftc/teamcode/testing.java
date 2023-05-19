@@ -1,12 +1,12 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous
-public class BasicAuton extends LinearOpMode {
+@TeleOp
+public class testing extends LinearOpMode {
     private FireHardwareMap hwMap = null;
     private ElapsedTime runtime = new ElapsedTime();
     //final double mecanumWheelCircumference = Math.PI*3.5; // note that this is slightly lower, adjusting for rolling w/ slipping
@@ -31,33 +31,19 @@ public class BasicAuton extends LinearOpMode {
         backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        frontRightMotor.setTargetPosition(200);
-        frontLeftMotor.setTargetPosition(-200);
-        backRightMotor.setTargetPosition(-200);
-        backLeftMotor.setTargetPosition(200);
-
-        frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         telemetry.addData("Robot Status: ", "ready");
-        telemetry.addData("Version: ", "Auton 1.3.3");
+        telemetry.addData("Version: ", "Auton 1.3.2");
         telemetry.update();
 
         waitForStart();
         runtime.reset();
 
-        frontRightMotor.setPower(0.06);
-        frontLeftMotor.setPower(0.06);
-        backRightMotor.setPower(0.06);
-        backLeftMotor.setPower(0.06);
-
         telemetry.addData("Robot Status: ", "started");
         telemetry.update();
 
-        while (opModeIsActive() && frontLeftMotor.isBusy()) {
-            telemetry.addData("Version: ", "Auton 1.3.3");
+        while (opModeIsActive()) {
+            telemetry.addData("Version: ", "Auton 1.3.2");
             telemetry.addData("Current frontLeftMotor Encoder Position: ", frontLeftMotor.getCurrentPosition());
             telemetry.addData("frontLeftMotor Operational: ", frontLeftMotor.isBusy());
             telemetry.addData("Current frontRightMotor Encoder Position: ", frontRightMotor.getCurrentPosition());
@@ -70,10 +56,7 @@ public class BasicAuton extends LinearOpMode {
             idle();
         }
 
-        frontRightMotor.setPower(0.0);
-        frontLeftMotor.setPower(0.0);
-        backRightMotor.setPower(0.0);
-        backLeftMotor.setPower(0.0);
+
 
 //        drive(0.9, 2000);
 

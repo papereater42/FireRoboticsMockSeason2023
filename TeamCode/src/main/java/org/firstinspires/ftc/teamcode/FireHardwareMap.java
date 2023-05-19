@@ -52,12 +52,19 @@ public class FireHardwareMap {
         backLeftMotor.setDirection(DcMotor.Direction.REVERSE);
 
         //Set motor mode
+        frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-
+//        frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
 
 
