@@ -15,7 +15,7 @@ public class TimeBasedAuton extends LinearOpMode {
     private FireHardwareMap hwMap = null;
     private ElapsedTime runtime = new ElapsedTime();
     private final double mecanumWheelRadius = 1.7;
-    private final double revolutionsPerSecond = 1620;
+    private final double revolutionsPerMinute = 1620;
 
     DcMotor frontRightMotor = null;
     DcMotor frontLeftMotor = null;
@@ -39,7 +39,7 @@ public class TimeBasedAuton extends LinearOpMode {
     }
 
     public void driveDistance(double distance) {
-        double timeNeeded = distance*1000/(revolutionsPerSecond/(2*Math.PI)*mecanumWheelRadius);
+        double timeNeeded = distance*1000/(revolutionsPerMinute/(60*2*Math.PI)*mecanumWheelRadius);
         driveTime(timeNeeded);
     }
 
