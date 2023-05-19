@@ -42,6 +42,7 @@ public class BasicAuton extends LinearOpMode {
         backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         telemetry.addData("Robot Status: ", "ready");
+        telemetry.addData("Version: ", "Auton 1.3.1");
         telemetry.update();
 
         waitForStart();
@@ -56,10 +57,15 @@ public class BasicAuton extends LinearOpMode {
         telemetry.update();
 
         while (opModeIsActive() && frontRightMotor.isBusy()) {
+            telemetry.addData("Version: ", "Auton 1.3.1");
             telemetry.addData("Current frontLeftMotor Encoder Position: ", frontLeftMotor.getCurrentPosition());
+            telemetry.addData("frontLeftMotor Operational: ", frontLeftMotor.isBusy());
             telemetry.addData("Current frontRightMotor Encoder Position: ", frontRightMotor.getCurrentPosition());
+            telemetry.addData("frontRightMotor Operational: ", frontRightMotor.isBusy());
             telemetry.addData("Current backLeftMotor Encoder Position: ", backLeftMotor.getCurrentPosition());
+            telemetry.addData("backLeftMotor Operational: ", backLeftMotor.isBusy());
             telemetry.addData("Current backRightMotor Encoder Position: ", backRightMotor.getCurrentPosition());
+            telemetry.addData("backRightMotor Operational: ", backRightMotor.isBusy());
             telemetry.update();
             idle();
         }
