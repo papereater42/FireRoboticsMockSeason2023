@@ -175,6 +175,14 @@ public class BasicAuton extends LinearOpMode {
             idle();
         }
 
+        frontRightMotor.setPower(0.0);
+        frontLeftMotor.setPower(0.0);
+        backRightMotor.setPower(0.0);
+        backLeftMotor.setPower(0.0);
+
+        mechanismMotor.setPower(0.0);
+
+
 //        drive(0.9, 2000);
 
     }
