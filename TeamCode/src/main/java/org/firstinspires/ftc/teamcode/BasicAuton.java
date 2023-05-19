@@ -16,7 +16,7 @@ public class BasicAuton extends LinearOpMode {
     DcMotor backRightMotor = null;
     DcMotor backLeftMotor = null;
 
-
+    private final int motorTicksPerTile = 1000;
 
     @Override
     public void runOpMode() {
@@ -31,10 +31,16 @@ public class BasicAuton extends LinearOpMode {
         backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        frontRightMotor.setTargetPosition(200);
-        frontLeftMotor.setTargetPosition(-200);
-        backRightMotor.setTargetPosition(-200);
-        backLeftMotor.setTargetPosition(200);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+
+        frontRightMotor.setTargetPosition(4*motorTicksPerTile);
+        frontLeftMotor.setTargetPosition(4*motorTicksPerTile);
+        backRightMotor.setTargetPosition(4*motorTicksPerTile);
+        backLeftMotor.setTargetPosition(4*motorTicksPerTile);
 
         frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -48,10 +54,10 @@ public class BasicAuton extends LinearOpMode {
         waitForStart();
         runtime.reset();
 
-        frontRightMotor.setPower(0.06);
-        frontLeftMotor.setPower(0.06);
-        backRightMotor.setPower(0.06);
-        backLeftMotor.setPower(0.06);
+        frontRightMotor.setPower(0.5);
+        frontLeftMotor.setPower(0.5);
+        backRightMotor.setPower(0.5);
+        backLeftMotor.setPower(0.5);
 
         telemetry.addData("Robot Status: ", "started");
         telemetry.update();
