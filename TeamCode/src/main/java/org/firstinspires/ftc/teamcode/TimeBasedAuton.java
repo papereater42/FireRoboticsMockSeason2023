@@ -14,8 +14,9 @@ Time based auton go brrr ig
 public class TimeBasedAuton extends LinearOpMode {
     private FireHardwareMap hwMap = null;
     private ElapsedTime runtime = new ElapsedTime();
-    private final double mecanumWheelRadius = 1.7;
-    private final double revolutionsPerMinute = 1620;
+    private final double mecanumWheelRadius = 1.8;
+    private final double revolutionsPerMinute = 312;
+    private final double motorPower = 0.5;
 
     DcMotor frontRightMotor = null;
     DcMotor frontLeftMotor = null;
@@ -39,16 +40,15 @@ public class TimeBasedAuton extends LinearOpMode {
     }
 
     public void driveDistance(double distance) {
-        double timeNeeded = distance*1000/(revolutionsPerMinute/(60*2*Math.PI)*mecanumWheelRadius);
+        double timeNeeded = distance*1000/(revolutionsPerMinute*motorPower/(60*2*Math.PI)*mecanumWheelRadius);
         driveTime(timeNeeded);
     }
 
     public void driveTime(double ms) {
-        double power = 0.5;
-        hwMap.backLeftMotor.setPower(power);
-        hwMap.backRightMotor.setPower(power);
-        hwMap.frontLeftMotor.setPower(power);
-        hwMap.frontRightMotor.setPower(power);
+        hwMap.backLeftMotor.setPower(motorPower);
+        hwMap.backRightMotor.setPower(motorPower);
+        hwMap.frontLeftMotor.setPower(motorPower);
+        hwMap.frontRightMotor.setPower(motorPower);
         sleep((long) ms);
         hwMap.backLeftMotor.setPower(0);
         hwMap.backRightMotor.setPower(0);
