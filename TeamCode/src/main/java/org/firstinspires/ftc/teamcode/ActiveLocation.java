@@ -14,8 +14,8 @@ public class ActiveLocation implements Runnable{
     //Hardware Set Up
     private final BNO055IMU imu;
     //TODO: Will be implemented once encoders are attached to bot
-    //private final DcMotor xDirectionEncoder;
-    //private final DcMotor yDirectionEncoder;
+    private final DcMotor xDirectionEncoder;
+    private final DcMotor yDirectionEncoder;
 
     //Encoder values
     private double yEncoderValue = 0;
@@ -47,16 +47,16 @@ public class ActiveLocation implements Runnable{
     public ActiveLocation (FireHardwareMap robot){
         this.imu = robot.imu;
         //TODO: Will be implemented once encoders are attached to bot
-        //this.xDirectionEncoder = robot.backRightMotor;
-        //this.yDirectionEncoder = robot.frontLeftMotor;
+        this.xDirectionEncoder = robot.backRightMotor;
+        this.yDirectionEncoder = robot.frontLeftMotor;
     }
 
 
     public ActiveLocation(DcMotor xDirectionEncoder, DcMotor yDirectionEncoder,
                           BNO055IMU gyroscope) {
         //TODO: Will be implemented once encoders are attached to bot
-        //this.yDirectionEncoder = yDirectionEncoder;
-        //this.xDirectionEncoder = xDirectionEncoder;
+        this.yDirectionEncoder = yDirectionEncoder;
+        this.xDirectionEncoder = xDirectionEncoder;
         this.imu = gyroscope;
     }
 
@@ -84,8 +84,8 @@ public class ActiveLocation implements Runnable{
                 + startY * Math.cos(startAngle.getAngleInRadians());
     }
     public void updateSensors(){
-        //yEncoderValue = yDirectionEncoder.getCurrentPosition();
-        //xEncoderValue = xDirectionEncoder.getCurrentPosition();
+        yEncoderValue = yDirectionEncoder.getCurrentPosition();
+        xEncoderValue = xDirectionEncoder.getCurrentPosition();
         angle = fromRadians(-((imu.getAngularOrientation().firstAngle)
                 + startAngle.getAngleInRadians() - resetAngle.getAngleInRadians()));
     }
@@ -94,11 +94,12 @@ public class ActiveLocation implements Runnable{
         double internalPreviousY = fieldYPosition;
         double internalPreviousX = fieldXPosition;
         synchronized (this) {
-            //fieldYPosition = tickToDistance(yEncoder);
-            //fieldXPosition = ticksToDistance(xEncoder);
+            fieldYPosition = tickToDistance(yEncoderValue);
+            fieldXPosition = tickToDistance(xEncoderValue);
         }
-        //double deltaY = internalCurrentY - internalPreviousY;
-        //double deltaX = internalCurrentX - internalPreviousX;
+        // TODO: I have no idea what this is so I'll ask Gorg and Rahul
+//        double deltaY = internalCurrentY - internalPreviousY;
+//        double deltaX = internalCurrentX - internalPreviousX;
 //        fieldXPosition += deltaX * Math.cos(angle.getAngleInRadians())
 //                - deltaY * Math.sin(angle.getAngleInRadians());
 //        fieldYPosition += deltaX * Math.sin(angle.getAngleInRadians())

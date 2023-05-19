@@ -44,7 +44,7 @@ public class LinearTeleOp extends LinearOpMode {
             double i =0.0;
 
 
-            HW.leftHex.setPower(i);
+            HW.mechanismMotor.setPower(i);
             // POV Mode uses left joystick to go forward & strafe, and right joystick to rotate.
             double axial   = -gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
             double lateral =  gamepad1.left_stick_x * 1.1;
@@ -96,7 +96,7 @@ public class LinearTeleOp extends LinearOpMode {
             HW.backRightMotor.setPower(rightBackPower);
 
 
-            HW.leftHex.setPower(axial1);
+            HW.mechanismMotor.setPower(axial1);
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());

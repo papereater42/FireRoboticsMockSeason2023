@@ -16,7 +16,7 @@ public class FireHardwareMap {
     public DcMotor backLeftMotor = null;
 
     //create servos
-    public DcMotor leftHex = null;
+    public DcMotor mechanismMotor = null;
 
     public BNO055IMU imu = null;
 
@@ -39,7 +39,7 @@ public class FireHardwareMap {
         backRightMotor = HardwareMap.get(DcMotor.class, "backRightMotor");
         backLeftMotor = HardwareMap.get(DcMotor.class, "backLeftMotor");
 
-        leftHex  = HardwareMap.get(DcMotor.class, "leftHex");
+        mechanismMotor = HardwareMap.get(DcMotor.class, "leftHex");
 
         //Making servo
         //leftServo = HardwareMap.get(Servo.class, "leftServo");
@@ -52,21 +52,21 @@ public class FireHardwareMap {
         backLeftMotor.setDirection(DcMotor.Direction.REVERSE);
 
         //Set motor mode
-//        frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-//        frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-//        backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-//        backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-
+        mechanismMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         //Set zero power behavior
 
