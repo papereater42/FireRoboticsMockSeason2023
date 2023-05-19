@@ -51,4 +51,6 @@ public final class Constants {
     public static final double footToMillimeter = 304.8;
     public static final double yardToMillimeter = 914.4;
     public static final double mileToMillimeter = 4828032;
+
+    public static final double inchesToEncoderTicks = 0.0;
 }

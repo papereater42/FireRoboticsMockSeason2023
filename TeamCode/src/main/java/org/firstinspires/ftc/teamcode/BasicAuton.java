@@ -16,6 +16,8 @@ public class BasicAuton extends LinearOpMode {
     DcMotor backRightMotor = null;
     DcMotor backLeftMotor = null;
 
+
+
     @Override
     public void runOpMode() {
         hwMap = new FireHardwareMap(this.hardwareMap);
@@ -29,10 +31,10 @@ public class BasicAuton extends LinearOpMode {
         backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        frontRightMotor.setTargetPosition(750);
-        frontLeftMotor.setTargetPosition(750);
-        backRightMotor.setTargetPosition(750);
-        backLeftMotor.setTargetPosition(750);
+        frontRightMotor.setTargetPosition(200);
+        frontLeftMotor.setTargetPosition(200);
+        backRightMotor.setTargetPosition(200);
+        backLeftMotor.setTargetPosition(200);
 
         frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -54,7 +56,10 @@ public class BasicAuton extends LinearOpMode {
         telemetry.update();
 
         while (opModeIsActive() && frontRightMotor.isBusy()) {
-            telemetry.addData("Current Encoder Position: ", frontLeftMotor.getCurrentPosition());
+            telemetry.addData("Current frontLeftMotor Encoder Position: ", frontLeftMotor.getCurrentPosition());
+            telemetry.addData("Current frontRightMotor Encoder Position: ", frontRightMotor.getCurrentPosition());
+            telemetry.addData("Current backLeftMotor Encoder Position: ", backLeftMotor.getCurrentPosition());
+            telemetry.addData("Current backRightMotor Encoder Position: ", backRightMotor.getCurrentPosition());
             telemetry.update();
             idle();
         }
