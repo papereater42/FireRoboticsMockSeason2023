@@ -41,16 +41,19 @@ public class BasicAuton extends LinearOpMode {
         backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
+        // starting sequence
         telemetry.addData("Robot Status: ", "ready");
         telemetry.addData("Version: ", "Auton 1.3.3");
         telemetry.update();
 
         waitForStart();
         runtime.reset();
-        drive(4.2);
 
         telemetry.addData("Robot Status: ", "started");
         telemetry.update();
+
+        // drive forward 4.2 tiles
+        drive(4.2);
 
         while (opModeIsActive() && frontLeftMotor.isBusy()) {
             telemetry.addData("Version: ", "Auton 1.3.3");
@@ -74,32 +77,10 @@ public class BasicAuton extends LinearOpMode {
 
         mechanismMotor.setPower(0.0);
 
-        // strafe right
-        frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        // strafe right (will make method later)
 
-        frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        frontRightMotor.setTargetPosition((int) (-2.5*motorTicksPerTile));
-        frontLeftMotor.setTargetPosition((int) (2.5*motorTicksPerTile));
-        backRightMotor.setTargetPosition((int) (2.5*motorTicksPerTile));
-        backLeftMotor.setTargetPosition((int) (-2.4*motorTicksPerTile));
-
-        frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-        frontRightMotor.setPower(0.5);
-        frontLeftMotor.setPower(0.5);
-        backRightMotor.setPower(0.5);
-        backLeftMotor.setPower(0.5);
-
+        // debug
         while (opModeIsActive() && frontLeftMotor.isBusy()) {
             telemetry.addData("Version: ", "Auton 1.3.3");
             telemetry.addData("Current frontLeftMotor Encoder Position: ", frontLeftMotor.getCurrentPosition());
@@ -117,6 +98,7 @@ public class BasicAuton extends LinearOpMode {
         // move back and outtake cone
         drive(-1.0);
 
+        // debug
         while (opModeIsActive() && frontLeftMotor.isBusy()) {
             telemetry.addData("Version: ", "Auton 1.3.3");
             telemetry.addData("Current frontLeftMotor Encoder Position: ", frontLeftMotor.getCurrentPosition());
@@ -158,6 +140,62 @@ public class BasicAuton extends LinearOpMode {
         frontLeftMotor.setTargetPosition((int) (numOfTiles*motorTicksPerTile));
         backRightMotor.setTargetPosition((int) (numOfTiles*motorTicksPerTile));
         backLeftMotor.setTargetPosition((int) (numOfTiles*motorTicksPerTile));
+
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        frontRightMotor.setPower(0.5);
+        frontLeftMotor.setPower(0.5);
+        backRightMotor.setPower(0.5);
+        backLeftMotor.setPower(0.5);
+    }
+
+    public void strafe(double numOfTiles, boolean right) {
+        int dir = (right) ? -1 : 1;
+        frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        frontRightMotor.setTargetPosition((int) (dir*numOfTiles*motorTicksPerTile));
+        frontLeftMotor.setTargetPosition((int) (-1*dir*numOfTiles*motorTicksPerTile));
+        backRightMotor.setTargetPosition((int) (-1*dir*numOfTiles*motorTicksPerTile));
+        backLeftMotor.setTargetPosition((int) (dir*numOfTiles*motorTicksPerTile));
+
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        frontRightMotor.setPower(0.5);
+        frontLeftMotor.setPower(0.5);
+        backRightMotor.setPower(0.5);
+        backLeftMotor.setPower(0.5);
+    }
+
+    public void rotate(double degrees, boolean ccw) {
+        int dir = (ccw) ? -1 : 1;
+        frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        frontRightMotor.setTargetPosition((int) (-1*dir*degrees*motorTicksPerTile));
+        frontLeftMotor.setTargetPosition((int) (dir*degrees*motorTicksPerTile));
+        backRightMotor.setTargetPosition((int) (-1*dir*degrees*motorTicksPerTile));
+        backLeftMotor.setTargetPosition((int) (dir*degrees*motorTicksPerTile));
 
         frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);

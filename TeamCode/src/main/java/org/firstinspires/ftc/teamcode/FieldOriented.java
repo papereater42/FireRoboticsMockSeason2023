@@ -37,8 +37,6 @@ public class FieldOriented extends LinearOpMode {
         double backLeftPower;
         double backRightPower;
 
-
-
         double currentAngle;
 
         double maxMotorSpeed = 0.7;
@@ -51,7 +49,7 @@ public class FieldOriented extends LinearOpMode {
 
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
-            currentAngle = activeLocation.getAngleInRadians();
+            currentAngle = activeLocation.getTrimmedAngleInRadians();
 
             drive = -gamepad1.left_stick_y * Math.cos(currentAngle) +
                     gamepad1.left_stick_x * Math.sin(currentAngle);
@@ -82,34 +80,24 @@ public class FieldOriented extends LinearOpMode {
             robot.backLeftMotor.setPower(backLeftPower * maxMotorSpeed);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             //TODO: Telemetry
+            telemetry.addData("Version: ", "FieldOriented TeleOp 2.0.1");
+
             telemetry.addData("Front Left Motor Power: ", robot.frontLeftMotor.getPower());
             telemetry.addData("Front Right Motor Power: ", robot.frontRightMotor.getPower());
             telemetry.addData("Back Left Motor Power: ", robot.backLeftMotor.getPower());
             telemetry.addData("Back Right Motor Power: ", robot.backRightMotor.getPower());
 
-
-
-
-
+            telemetry.addData("Current frontLeftMotor Encoder Position: ", robot.frontLeftMotor.getCurrentPosition());
+            telemetry.addData("frontLeftMotor Operational: ", robot.frontLeftMotor.isBusy());
+            telemetry.addData("Current frontRightMotor Encoder Position: ", robot.frontRightMotor.getCurrentPosition());
+            telemetry.addData("frontRightMotor Operational: ", robot.frontRightMotor.isBusy());
+            telemetry.addData("Current backLeftMotor Encoder Position: ", robot.backLeftMotor.getCurrentPosition());
+            telemetry.addData("backLeftMotor Operational: ", robot.backLeftMotor.isBusy());
+            telemetry.addData("Current backRightMotor Encoder Position: ", robot.backRightMotor.getCurrentPosition());
+            telemetry.addData("backRightMotor Operational: ", robot.backRightMotor.isBusy());
             telemetry.update();
+
         }
-    }}
+    }
+}
