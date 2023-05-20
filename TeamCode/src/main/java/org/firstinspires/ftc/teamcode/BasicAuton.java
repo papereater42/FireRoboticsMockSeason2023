@@ -28,34 +28,18 @@ public class BasicAuton extends LinearOpMode {
         backLeftMotor = hwMap.backLeftMotor;
         mechanismMotor = hwMap.mechanismMotor;
 
+        mechanismMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        mechanismMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
         frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        mechanismMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
         frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-        mechanismMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-        // move from start position to far tile, also intake the cone by spinning mechanismMotor CCW
-        frontRightMotor.setTargetPosition((int) (4.2*motorTicksPerTile));
-        frontLeftMotor.setTargetPosition((int) (4.2*motorTicksPerTile));
-        backRightMotor.setTargetPosition((int) (4.2*motorTicksPerTile));
-        backLeftMotor.setTargetPosition((int) (4.2*motorTicksPerTile));
-
-//        mechanismMotor.setTargetPosition((int) (-10000));
-
-        frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-//        mechanismMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         telemetry.addData("Robot Status: ", "ready");
         telemetry.addData("Version: ", "Auton 1.3.3");
@@ -63,12 +47,7 @@ public class BasicAuton extends LinearOpMode {
 
         waitForStart();
         runtime.reset();
-
-        frontRightMotor.setPower(0.5);
-        frontLeftMotor.setPower(0.5);
-        backRightMotor.setPower(0.5);
-        backLeftMotor.setPower(0.5);
-
+        drive(4.2);
 
         telemetry.addData("Robot Status: ", "started");
         telemetry.update();
@@ -95,7 +74,7 @@ public class BasicAuton extends LinearOpMode {
 
         mechanismMotor.setPower(0.0);
 
-        // make the turn
+        // strafe right
         frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -136,30 +115,7 @@ public class BasicAuton extends LinearOpMode {
         }
 
         // move back and outtake cone
-        frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-        frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-        frontRightMotor.setTargetPosition((int) (-1*motorTicksPerTile));
-        frontLeftMotor.setTargetPosition((int) (-1*motorTicksPerTile));
-        backRightMotor.setTargetPosition((int) (-1*motorTicksPerTile));
-        backLeftMotor.setTargetPosition((int) (-1*motorTicksPerTile));
-
-        frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-        frontRightMotor.setPower(0.5);
-        frontLeftMotor.setPower(0.5);
-        backRightMotor.setPower(0.5);
-        backLeftMotor.setPower(0.5);
+        drive(-1.0);
 
         while (opModeIsActive() && frontLeftMotor.isBusy()) {
             telemetry.addData("Version: ", "Auton 1.3.3");
@@ -187,15 +143,30 @@ public class BasicAuton extends LinearOpMode {
 
     }
 
-//    public void drive(double power, int ms) {
-//        hwMap.backLeftMotor.setPower(power);
-//        hwMap.backRightMotor.setPower(power);
-//        hwMap.frontLeftMotor.setPower(power);
-//        hwMap.frontRightMotor.setPower(power);
-//        sleep((long) ms);
-//    }
-//
-//    public void drive(double dist) {
-//
-//    }
+    public void drive(double numOfTiles) {
+        frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        frontRightMotor.setTargetPosition((int) (numOfTiles*motorTicksPerTile));
+        frontLeftMotor.setTargetPosition((int) (numOfTiles*motorTicksPerTile));
+        backRightMotor.setTargetPosition((int) (numOfTiles*motorTicksPerTile));
+        backLeftMotor.setTargetPosition((int) (numOfTiles*motorTicksPerTile));
+
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        frontRightMotor.setPower(0.5);
+        frontLeftMotor.setPower(0.5);
+        backRightMotor.setPower(0.5);
+        backLeftMotor.setPower(0.5);
+    }
 }
