@@ -53,11 +53,11 @@ public class BasicAuton extends LinearOpMode {
         telemetry.update();
 
         // drive forward 4.2 tiles
-        drive(4.3);
+        drive(4.5);
 
-        mechanismMotor.setTargetPosition(800);
+        mechanismMotor.setTargetPosition(20);
         mechanismMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        mechanismMotor.setPower(0.2);
+        mechanismMotor.setPower(0.4);
 
         while (opModeIsActive() && frontLeftMotor.isBusy()) {
             telemetry.addData("Version: ", "Auton 1.3.3");
@@ -70,7 +70,6 @@ public class BasicAuton extends LinearOpMode {
             telemetry.addData("Current backRightMotor Encoder Position: ", backRightMotor.getCurrentPosition());
             telemetry.addData("backRightMotor Operational: ", backRightMotor.isBusy());
             telemetry.update();
-            mechanismMotor.setPower(0.8);
             idle();
         }
 
@@ -98,7 +97,7 @@ public class BasicAuton extends LinearOpMode {
         }
 
         // move back and outtake cone
-        drive(-2);
+        drive(-1.3);
 
         // debug
         while (opModeIsActive() && frontLeftMotor.isBusy()) {
@@ -167,8 +166,8 @@ public class BasicAuton extends LinearOpMode {
         backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         frontRightMotor.setTargetPosition((int) (dir*numOfTiles*motorTicksPerTile));
-        frontLeftMotor.setTargetPosition((int) (-1*dir*numOfTiles*motorTicksPerTile));
-        backRightMotor.setTargetPosition((int) (-1*dir*numOfTiles*motorTicksPerTile));
+        frontLeftMotor.setTargetPosition((int) (-0.9*dir*numOfTiles*motorTicksPerTile));
+        backRightMotor.setTargetPosition((int) (-0.9*dir*numOfTiles*motorTicksPerTile));
         backLeftMotor.setTargetPosition((int) (dir*numOfTiles*motorTicksPerTile));
 
         frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
