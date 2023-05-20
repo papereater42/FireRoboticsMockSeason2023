@@ -22,11 +22,12 @@ public class FieldOriented extends LinearOpMode {
     // Declare OpMode members for each of the 4 motors.
     private ElapsedTime runtime = new ElapsedTime();
     private FireHardwareMap robot = null;
-    ActiveLocation activeLocation = new ActiveLocation(robot);
+    private ActiveLocation activeLocation = null;
     @Override
 
     public void runOpMode() {
         robot = new FireHardwareMap(this.hardwareMap);
+        activeLocation = new ActiveLocation(robot);
 
         double drive;
         double strafe;
@@ -37,11 +38,15 @@ public class FieldOriented extends LinearOpMode {
         double backLeftPower;
         double backRightPower;
 
+        double axial1;
+
         double currentAngle;
 
-        double maxMotorSpeed = 0.7;
+        double maxMotorSpeed = 0.9;
 
         double maxPower;
+
+        int filler = 0;
 
         int heightDifferential = 0;
 
@@ -57,6 +62,8 @@ public class FieldOriented extends LinearOpMode {
                     -gamepad1.left_stick_y * Math.sin(currentAngle);
             turn = gamepad1.right_stick_x;
 
+            axial1   = -gamepad2.left_stick_y;
+
             frontLeftPower = drive + strafe + turn;
             frontRightPower = drive - strafe - turn;
             backLeftPower = drive - strafe + turn;
@@ -64,7 +71,6 @@ public class FieldOriented extends LinearOpMode {
 
 
             if (Math.abs(frontLeftPower) > 1 || Math.abs(frontRightPower) > 1 || Math.abs(backLeftPower) > 1 || Math.abs(backRightPower) > 1){
-
                 maxPower = Math.max(Math.abs(frontLeftPower), Math.max(Math.abs(frontRightPower), Math.max(Math.abs(backLeftPower), Math.abs(backRightPower))));
 
                 //fix problem
@@ -74,10 +80,22 @@ public class FieldOriented extends LinearOpMode {
                 backRightPower /= maxPower;
             }
 
+            if(gamepad1.right_bumper){
+                filler=0;
+            }
+            else{
+                frontLeftPower /= 1.8;
+                frontRightPower /= 1.8;
+                backLeftPower /= 1.8;
+                backRightPower /= 1.8;
+            }
+
             robot.frontLeftMotor.setPower(frontLeftPower * maxMotorSpeed);
             robot.frontRightMotor.setPower(frontRightPower * maxMotorSpeed);
             robot.backRightMotor.setPower(backRightPower * maxMotorSpeed);
             robot.backLeftMotor.setPower(backLeftPower * maxMotorSpeed);
+
+            robot.mechanismMotor.setPower(axial1 * 0.7);
 
 
             //TODO: Telemetry

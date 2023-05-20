@@ -26,12 +26,12 @@ public class FireHardwareMap {
 
     public ElapsedTime runtime = new ElapsedTime();
 
-    public FireHardwareMap(com.qualcomm.robotcore.hardware.HardwareMap hwmap){
+    public FireHardwareMap(com.qualcomm.robotcore.hardware.HardwareMap hwmap) {
 
         initialize(hwmap);
     }
 
-    private void initialize(com.qualcomm.robotcore.hardware.HardwareMap hwmap){
+    private void initialize(com.qualcomm.robotcore.hardware.HardwareMap hwmap) {
         HardwareMap = hwmap;
         //the name of device should change based on name
         frontRightMotor = HardwareMap.get(DcMotor.class, "frontRightMotor");
@@ -39,7 +39,7 @@ public class FireHardwareMap {
         backRightMotor = HardwareMap.get(DcMotor.class, "backRightMotor");
         backLeftMotor = HardwareMap.get(DcMotor.class, "backLeftMotor");
 
-        mechanismMotor = HardwareMap.get(DcMotor.class, "leftHex");
+        mechanismMotor = HardwareMap.get(DcMotor.class, "mechanismMotor");
 
         //Making servo
         //leftServo = HardwareMap.get(Servo.class, "leftServo");
@@ -80,6 +80,7 @@ public class FireHardwareMap {
         backRightMotor.setPower(0);
         backLeftMotor.setPower(0);
 
+
         BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
         //return value of radians
         parameters.angleUnit = BNO055IMU.AngleUnit.RADIANS;
@@ -90,19 +91,13 @@ public class FireHardwareMap {
         parameters.accelerationIntegrationAlgorithm = new JustLoggingAccelerationIntegrator();
 
         //gets imu from rev hardware map and connects it to code
-        imu = hwmap.get(BNO055IMU.class, "imu");
-        //sets the settings we declared above.
+        imu = HardwareMap.get(BNO055IMU.class, "imu");        //sets the settings we declared above.
         imu.initialize(parameters);
         imu.startAccelerationIntegration(new Position(), new Velocity(), 1000);
-
-
     }
-
-
-
-
-
-
-
-
 }
+
+
+
+
+

@@ -13,7 +13,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
  */
 
-@TeleOp(name="George's Teleop", group="Linear Opmode")
+@TeleOp(name="Robot Oriented TeleOp", group="Linear Opmode")
 public class LinearTeleOp extends LinearOpMode {
 
     //ServoImplEx servo;
@@ -73,11 +73,7 @@ public class LinearTeleOp extends LinearOpMode {
                 axial1 /=max;
             }
             if(gamepad1.right_bumper){
-
                 i = 0.8;
-
-
-
             }
             else{
                 leftFrontPower  /= 2;
@@ -103,6 +99,17 @@ public class LinearTeleOp extends LinearOpMode {
             telemetry.addData("Front left/Right", "%4.2f, %4.2f", leftFrontPower, rightFrontPower);
             telemetry.addData("Back  left/Right", "%4.2f, %4.2f", leftBackPower, rightBackPower);
             telemetry.addData("Servo  left/Right", "%4.2f, %4.2f", axial1, axial1);
+
+            telemetry.addData("Current frontLeftMotor Encoder Position: ", HW.frontLeftMotor.getCurrentPosition());
+            telemetry.addData("frontLeftMotor Operational: ", HW.frontLeftMotor.isBusy());
+            telemetry.addData("Current frontRightMotor Encoder Position: ", HW.frontRightMotor.getCurrentPosition());
+            telemetry.addData("frontRightMotor Operational: ", HW.frontRightMotor.isBusy());
+            telemetry.addData("Current backLeftMotor Encoder Position: ", HW.backLeftMotor.getCurrentPosition());
+            telemetry.addData("backLeftMotor Operational: ", HW.backLeftMotor.isBusy());
+            telemetry.addData("Current backRightMotor Encoder Position: ", HW.backRightMotor.getCurrentPosition());
+            telemetry.addData("backRightMotor Operational: ", HW.backRightMotor.isBusy());
+            telemetry.update();
+
             telemetry.update();
         }
     }}

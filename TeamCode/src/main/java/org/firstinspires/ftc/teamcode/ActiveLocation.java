@@ -12,10 +12,10 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 public class ActiveLocation implements Runnable{
 
     //Hardware Set Up
-    private final BNO055IMU imu;
+    private BNO055IMU imu;
     //TODO: Will be implemented once encoders are attached to bot
-    private final DcMotor xDirectionEncoder;
-    private final DcMotor yDirectionEncoder;
+    private DcMotor xDirectionEncoder;
+    private DcMotor yDirectionEncoder;
 
     //Encoder values
     private double yEncoderValue = 0;

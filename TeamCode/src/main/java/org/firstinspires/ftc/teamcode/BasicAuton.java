@@ -53,7 +53,11 @@ public class BasicAuton extends LinearOpMode {
         telemetry.update();
 
         // drive forward 4.2 tiles
-        drive(4.2);
+        drive(4.3);
+
+        mechanismMotor.setTargetPosition(800);
+        mechanismMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        mechanismMotor.setPower(0.2);
 
         while (opModeIsActive() && frontLeftMotor.isBusy()) {
             telemetry.addData("Version: ", "Auton 1.3.3");
@@ -75,10 +79,8 @@ public class BasicAuton extends LinearOpMode {
         backRightMotor.setPower(0.0);
         backLeftMotor.setPower(0.0);
 
-        mechanismMotor.setPower(0.0);
-
         // strafe right (will make method later)
-
+        strafe(3.7, true);
 
         // debug
         while (opModeIsActive() && frontLeftMotor.isBusy()) {
@@ -96,7 +98,7 @@ public class BasicAuton extends LinearOpMode {
         }
 
         // move back and outtake cone
-        drive(-1.0);
+        drive(-2);
 
         // debug
         while (opModeIsActive() && frontLeftMotor.isBusy()) {
@@ -180,8 +182,8 @@ public class BasicAuton extends LinearOpMode {
         backLeftMotor.setPower(0.5);
     }
 
-    public void rotate(double degrees, boolean ccw) {
-        int dir = (ccw) ? -1 : 1;
+    public void rotate(double degrees, boolean cw) {
+        int dir = (cw) ? 1 : -1;
         frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -192,10 +194,10 @@ public class BasicAuton extends LinearOpMode {
         backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        frontRightMotor.setTargetPosition((int) (-1*dir*degrees*motorTicksPerTile));
-        frontLeftMotor.setTargetPosition((int) (dir*degrees*motorTicksPerTile));
-        backRightMotor.setTargetPosition((int) (-1*dir*degrees*motorTicksPerTile));
-        backLeftMotor.setTargetPosition((int) (dir*degrees*motorTicksPerTile));
+        frontRightMotor.setTargetPosition((int) (-1*dir*degrees*800.0/90));
+        frontLeftMotor.setTargetPosition((int) (dir*degrees*800.0/90));
+        backRightMotor.setTargetPosition((int) (dir*degrees*800.0/90));
+        backLeftMotor.setTargetPosition((int) (-1*dir*degrees*800.0/90));
 
         frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
