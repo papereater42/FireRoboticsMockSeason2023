@@ -152,7 +152,7 @@ public class BasicAuton extends LinearOpMode {
         frontRightMotor.setPower(0.5);
         frontLeftMotor.setPower(0.5);
         backRightMotor.setPower(0.5);
-        backLeftMotor.setPower(0.53);
+        backLeftMotor.setPower(0.5);
     }
 
     public void strafe(double numOfTiles, boolean right) {
