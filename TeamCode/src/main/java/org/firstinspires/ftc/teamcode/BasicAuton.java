@@ -43,7 +43,7 @@ public class BasicAuton extends LinearOpMode {
 
         // starting sequence
         telemetry.addData("Robot Status: ", "ready");
-        telemetry.addData("Version: ", "Auton 1.3.3");
+        telemetry.addData("Version: ", "Auton 1.4");
         telemetry.update();
 
         waitForStart();
@@ -60,7 +60,7 @@ public class BasicAuton extends LinearOpMode {
         mechanismMotor.setPower(0.4);
 
         while (opModeIsActive() && frontLeftMotor.isBusy()) {
-            telemetry.addData("Version: ", "Auton 1.3.3");
+            telemetry.addData("Version: ", "Auton 1.4");
             telemetry.addData("Current frontLeftMotor Encoder Position: ", frontLeftMotor.getCurrentPosition());
             telemetry.addData("frontLeftMotor Operational: ", frontLeftMotor.isBusy());
             telemetry.addData("Current frontRightMotor Encoder Position: ", frontRightMotor.getCurrentPosition());
@@ -81,11 +81,11 @@ public class BasicAuton extends LinearOpMode {
         mechanismMotor.setPower(0);
 
         // strafe right (will make method later)
-        strafe(3.7, true);
+        strafe(4.5, true);
 
         // debug
         while (opModeIsActive() && frontLeftMotor.isBusy()) {
-            telemetry.addData("Version: ", "Auton 1.3.3");
+            telemetry.addData("Version: ", "Auton 1.4");
             telemetry.addData("Current frontLeftMotor Encoder Position: ", frontLeftMotor.getCurrentPosition());
             telemetry.addData("frontLeftMotor Operational: ", frontLeftMotor.isBusy());
             telemetry.addData("Current frontRightMotor Encoder Position: ", frontRightMotor.getCurrentPosition());
@@ -103,7 +103,7 @@ public class BasicAuton extends LinearOpMode {
 
         // debug
         while (opModeIsActive() && frontLeftMotor.isBusy()) {
-            telemetry.addData("Version: ", "Auton 1.3.3");
+            telemetry.addData("Version: ", "Auton 1.4");
             telemetry.addData("Current frontLeftMotor Encoder Position: ", frontLeftMotor.getCurrentPosition());
             telemetry.addData("frontLeftMotor Operational: ", frontLeftMotor.isBusy());
             telemetry.addData("Current frontRightMotor Encoder Position: ", frontRightMotor.getCurrentPosition());
