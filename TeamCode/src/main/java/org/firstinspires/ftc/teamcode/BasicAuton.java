@@ -78,6 +78,8 @@ public class BasicAuton extends LinearOpMode {
         backRightMotor.setPower(0.0);
         backLeftMotor.setPower(0.0);
 
+        mechanismMotor.setPower(0);
+
         // strafe right (will make method later)
         strafe(3.7, true);
 
