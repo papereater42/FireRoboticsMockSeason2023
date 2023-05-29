@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsTouchSensor;
+import com.qualcomm.hardware.rev.RevTouchSensor;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
@@ -47,7 +48,7 @@ public class FireHardwareMap {
 
         mechanismMotor = HardwareMap.get(DcMotor.class, "mechanismMotor");
 
-       touch = HardwareMap.get(ModernRoboticsTouchSensor.class, "touch");
+       touch = HardwareMap.get(RevTouchSensor.class, "touch");
        led = HardwareMap.get(RevBlinkinLedDriver.class, "led");
         //Making servo
         //leftServo = HardwareMap.get(Servo.class, "leftServo");
