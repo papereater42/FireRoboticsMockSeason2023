@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 @Autonomous
-public class BasicAuton extends LinearOpMode {
+public class NewAuton extends LinearOpMode {
     private FireHardwareMap hwMap = null;
     private ElapsedTime runtime = new ElapsedTime();
     //final double mecanumWheelCircumference = Math.PI*3.5; // note that this is slightly lower, adjusting for rolling w/ slipping
@@ -27,6 +27,7 @@ public class BasicAuton extends LinearOpMode {
         backRightMotor = hwMap.backRightMotor;
         backLeftMotor = hwMap.backLeftMotor;
         mechanismMotor = hwMap.mechanismMotor;
+        ActiveLocation activeLocation = new ActiveLocation(hwMap);
 
         mechanismMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         mechanismMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -54,12 +55,34 @@ public class BasicAuton extends LinearOpMode {
 
         // drive forward 4.2 tiles
 
-        rotate(7, true);
+
+        drive(4.3, 1000,true,activeLocation);
 
 
 
         while (opModeIsActive() && frontLeftMotor.isBusy()) {
+            hwMap = new FireHardwareMap(this.hardwareMap);
+
+            double currentAngle;
+            currentAngle = activeLocation.getTrimmedAngleInRadians();
+            double drive;
+            double strafe;
+
+            double frontLeftPower;
+            double frontRightPower;
+            double backLeftPower;
+            double backRightPower;
+            drive = 0.5 * Math.cos(currentAngle);
+            strafe = -0.5 * Math.sin(currentAngle);
+
+
+            frontLeftPower = drive + strafe;
+            frontRightPower = drive - strafe;
+            backLeftPower = drive - strafe;
+            backRightPower = drive + strafe;
+
             telemetry.addData("Version: ", "Auton 1.4");
+            telemetry.addData("Current frontLeftMotor Encoder Position: ", currentAngle);
             telemetry.addData("Current frontLeftMotor Encoder Position: ", frontLeftMotor.getCurrentPosition());
             telemetry.addData("frontLeftMotor Operational: ", frontLeftMotor.isBusy());
             telemetry.addData("Current frontRightMotor Encoder Position: ", frontRightMotor.getCurrentPosition());
@@ -70,42 +93,18 @@ public class BasicAuton extends LinearOpMode {
             telemetry.addData("backRightMotor Operational: ", backRightMotor.isBusy());
             telemetry.update();
             idle();
-        }
-        frontRightMotor.setPower(0.0);
-        frontLeftMotor.setPower(0.0);
-        backRightMotor.setPower(0.0);
-        backLeftMotor.setPower(0.0);
-
-        mechanismMotor.setPower(0);
-
-     drive(4.65, 1000,true);
-
-
-
-        while (opModeIsActive() && frontLeftMotor.isBusy()) {
-            telemetry.addData("Version: ", "Auton 1.4");
-            telemetry.addData("Current frontLeftMotor Encoder Position: ", frontLeftMotor.getCurrentPosition());
-            telemetry.addData("frontLeftMotor Operational: ", frontLeftMotor.isBusy());
-            telemetry.addData("Current frontRightMotor Encoder Position: ", frontRightMotor.getCurrentPosition());
-            telemetry.addData("frontRightMotor Operational: ", frontRightMotor.isBusy());
-            telemetry.addData("Current backLeftMotor Encoder Position: ", backLeftMotor.getCurrentPosition());
-            telemetry.addData("backLeftMotor Operational: ", backLeftMotor.isBusy());
-            telemetry.addData("Current backRightMotor Encoder Position: ", backRightMotor.getCurrentPosition());
-            telemetry.addData("backRightMotor Operational: ", backRightMotor.isBusy());
-            telemetry.update();
-            idle();
+            frontRightMotor.setPower(frontRightPower);
+            frontLeftMotor.setPower(frontLeftPower);
+            backRightMotor.setPower(backRightPower);
+            backLeftMotor.setPower(backLeftPower);
+            mechanismMotor.setPower(0.8);
         }
 
-        frontRightMotor.setPower(0.0);
-        frontLeftMotor.setPower(0.0);
-        backRightMotor.setPower(0.0);
-        backLeftMotor.setPower(0.0);
 
-        mechanismMotor.setPower(0);
 
         // strafe right (will make method later)
         rotate(85, true);
-       //drive(2);
+        //drive(2);
         //strafe(4.5, true);
 
         // debug
@@ -123,16 +122,8 @@ public class BasicAuton extends LinearOpMode {
             idle();
         }
 
-        frontRightMotor.setPower(0.0);
-        frontLeftMotor.setPower(0.0);
-        backRightMotor.setPower(0.0);
-        backLeftMotor.setPower(0.0);
-
-        mechanismMotor.setPower(0);
-
-
         // move forward
-       drive(3,0,true);
+        drive(3,0,true,activeLocation);
 
         // debug
         while (opModeIsActive() && frontLeftMotor.isBusy()) {
@@ -159,7 +150,7 @@ public class BasicAuton extends LinearOpMode {
 
 //        drive(0.9, 2000);
 
-        drive(0, -1000,false);
+        drive(0, -1000,false,activeLocation);
 
 
 
@@ -184,7 +175,7 @@ public class BasicAuton extends LinearOpMode {
 
         mechanismMotor.setPower(0);
 
-        strafe(1.2, true);
+        strafe(1.5, true);
 
 
 
@@ -209,7 +200,7 @@ public class BasicAuton extends LinearOpMode {
 
         mechanismMotor.setPower(0);
 
-        drive(0.2, 0,false);
+        drive(0.2, 0,false, activeLocation);
 
 
 
@@ -237,12 +228,32 @@ public class BasicAuton extends LinearOpMode {
 
     }
 
-    public void drive(double numOfTiles, int mechMotor, boolean cone) {
+    public void drive(double numOfTiles, int mechMotor, boolean cone, ActiveLocation location) {
         double x = 0.5;
         if(cone){
             x = 0.99;
         }
 
+
+        hwMap = new FireHardwareMap(this.hardwareMap);
+
+        double currentAngle;
+        currentAngle = location.getTrimmedAngleInRadians();
+        double drive;
+        double strafe;
+
+        double frontLeftPower;
+        double frontRightPower;
+        double backLeftPower;
+        double backRightPower;
+        drive = x * Math.cos(currentAngle);
+        strafe = -x * Math.sin(currentAngle);
+
+
+        frontLeftPower = drive + strafe;
+        frontRightPower = drive - strafe;
+        backLeftPower = drive - strafe;
+        backRightPower = drive + strafe;
 
         frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -271,10 +282,10 @@ public class BasicAuton extends LinearOpMode {
 
         mechanismMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        frontRightMotor.setPower(x);
-        frontLeftMotor.setPower(x);
-        backRightMotor.setPower(x);
-        backLeftMotor.setPower(x);
+        frontRightMotor.setPower(frontRightPower);
+        frontLeftMotor.setPower(frontLeftPower);
+        backRightMotor.setPower(backRightPower);
+        backLeftMotor.setPower(backLeftPower);
         mechanismMotor.setPower(0.8);
     }
 

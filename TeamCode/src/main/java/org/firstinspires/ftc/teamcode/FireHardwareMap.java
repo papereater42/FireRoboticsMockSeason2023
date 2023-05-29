@@ -1,13 +1,14 @@
 package org.firstinspires.ftc.teamcode;
-
+import com.qualcomm.hardware.modernrobotics.ModernRoboticsTouchSensor;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.hardware.bosch.JustLoggingAccelerationIntegrator;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
+import com.qualcomm.robotcore.hardware.TouchSensor;
 import org.firstinspires.ftc.robotcore.external.navigation.Position;
 import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
-
+import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 public class FireHardwareMap {
     //create motors
     public DcMotor frontRightMotor = null;
@@ -20,11 +21,16 @@ public class FireHardwareMap {
 
     public BNO055IMU imu = null;
 
+    //public TouchSensor touch = null;
+    public RevBlinkinLedDriver led = null;
+    public TouchSensor touch = null;
 
     //Hardware Map object
     com.qualcomm.robotcore.hardware.HardwareMap HardwareMap = null;
 
     public ElapsedTime runtime = new ElapsedTime();
+
+
 
     public FireHardwareMap(com.qualcomm.robotcore.hardware.HardwareMap hwmap) {
 
@@ -41,6 +47,8 @@ public class FireHardwareMap {
 
         mechanismMotor = HardwareMap.get(DcMotor.class, "mechanismMotor");
 
+       touch = HardwareMap.get(ModernRoboticsTouchSensor.class, "touch");
+       led = HardwareMap.get(RevBlinkinLedDriver.class, "led");
         //Making servo
         //leftServo = HardwareMap.get(Servo.class, "leftServo");
 

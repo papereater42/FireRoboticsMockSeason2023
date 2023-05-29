@@ -1,4 +1,5 @@
 package org.firstinspires.ftc.teamcode;
+import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -51,6 +52,7 @@ public class LinearTeleOp extends LinearOpMode {
             double yaw     =  gamepad1.right_stick_x;
 
             double axial1   = -gamepad2.left_stick_y;
+            double axial2 = -gamepad2.right_stick_y;
             // Combine the joystick requests for each axis-motion to determine each wheel's power.
             // Set up a variable for each drive wheel to save the power level for telemetry.
             double leftFrontPower  = axial + lateral + yaw;
@@ -71,6 +73,7 @@ public class LinearTeleOp extends LinearOpMode {
                 leftBackPower   /= max;
                 rightBackPower  /= max;
                 axial1 /=max;
+                axial2 /=max;
             }
             if(gamepad1.right_bumper){
                 i = 0.8;
@@ -83,7 +86,7 @@ public class LinearTeleOp extends LinearOpMode {
             }
 
 
-
+            axial2 = axial2/1.5;
 
             // Send calculated power to wheels
             HW.frontLeftMotor.setPower(leftFrontPower);
@@ -91,9 +94,18 @@ public class LinearTeleOp extends LinearOpMode {
             HW.backLeftMotor.setPower(leftBackPower);
             HW.backRightMotor.setPower(rightBackPower);
 
-
-            HW.mechanismMotor.setPower(axial1);
-
+            if(axial2 < 0){
+                HW.mechanismMotor.setPower(-0.75);
+            }
+            else {
+                HW.mechanismMotor.setPower(axial1);
+            }
+            if(HW.touch.isPressed()){
+                HW.led.setPattern(RevBlinkinLedDriver.BlinkinPattern.GREEN);
+            }
+            else{
+                HW.led.setPattern(RevBlinkinLedDriver.BlinkinPattern.RED);
+            }
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("Front left/Right", "%4.2f, %4.2f", leftFrontPower, rightFrontPower);
