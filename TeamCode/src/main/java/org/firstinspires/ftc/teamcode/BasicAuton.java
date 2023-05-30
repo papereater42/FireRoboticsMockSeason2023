@@ -186,12 +186,14 @@ public class BasicAuton extends LinearOpMode {
 
 //        drive(0.9, 2000);
 
-        drive(0, -1000,false,true);
-        drive(-0.2, 0,false,false);
+        drive(-0.3, -1000,false,true);
 
 
 
-        while (opModeIsActive() && frontLeftMotor.isBusy()) {
+
+
+
+        while (opModeIsActive() && mechanismMotor.isBusy()) {
             telemetry.addData("Version: ", "Auton 1.4");
             telemetry.addData("IMU: ", activeLocation.getTrimmedAngleInDegrees());
             telemetry.addData("Current frontLeftMotor Encoder Position: ", frontLeftMotor.getCurrentPosition());
@@ -241,7 +243,7 @@ public class BasicAuton extends LinearOpMode {
 
 
 
-        drive(0.55, 0,false,false);
+        drive(0.65, 0,false,false);
 
 
 
