@@ -108,7 +108,7 @@ public class BasicAuton extends LinearOpMode {
 
         mechanismMotor.setPower(0);
 
-        drive(0, 100,false,false);
+        drive(0, 50,false,false);
 
 
 
@@ -213,7 +213,7 @@ public class BasicAuton extends LinearOpMode {
 
         mechanismMotor.setPower(0);
 
-        strafe(1.35, true);
+        strafe(1.4, true);
 
 
 
