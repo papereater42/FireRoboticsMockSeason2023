@@ -1,4 +1,5 @@
 package org.firstinspires.ftc.teamcode;
+import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -45,7 +46,7 @@ public class FieldOriented extends LinearOpMode {
         double maxMotorSpeed = 0.9;
 
         double maxPower;
-
+        double axial2;
         int filler = 0;
 
         int heightDifferential = 0;
@@ -63,6 +64,8 @@ public class FieldOriented extends LinearOpMode {
             turn = gamepad1.right_stick_x;
 
             axial1   = -gamepad2.left_stick_y;
+
+            axial2 = -gamepad2.right_stick_y;
 
             frontLeftPower = drive + strafe + turn;
             frontRightPower = drive - strafe - turn;
@@ -89,13 +92,24 @@ public class FieldOriented extends LinearOpMode {
                 backLeftPower /= 1.8;
                 backRightPower /= 1.8;
             }
-
+            if(axial2 < 0){
+                robot.mechanismMotor.setPower(-0.75);
+            }
+            else {
+                robot.mechanismMotor.setPower(axial1);
+            }
+            if(robot.touch.isPressed()){
+                robot.led.setPattern(RevBlinkinLedDriver.BlinkinPattern.GREEN);
+            }
+            else{
+                robot.led.setPattern(RevBlinkinLedDriver.BlinkinPattern.RED);
+            }
             robot.frontLeftMotor.setPower(frontLeftPower * maxMotorSpeed);
             robot.frontRightMotor.setPower(frontRightPower * maxMotorSpeed);
             robot.backRightMotor.setPower(backRightPower * maxMotorSpeed);
             robot.backLeftMotor.setPower(backLeftPower * maxMotorSpeed);
 
-            robot.mechanismMotor.setPower(axial1 * 0.7);
+
 
 
             //TODO: Telemetry
