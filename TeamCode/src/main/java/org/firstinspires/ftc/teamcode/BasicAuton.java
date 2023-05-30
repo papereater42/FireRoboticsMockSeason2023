@@ -192,7 +192,7 @@ public class BasicAuton extends LinearOpMode {
 
         mechanismMotor.setPower(0);
 
-        strafe(1.3, true);
+        strafe(1.5, true);
 
 
 
