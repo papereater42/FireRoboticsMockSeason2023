@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class BasicAuton extends LinearOpMode {
     private FireHardwareMap hwMap = null;
     private ElapsedTime runtime = new ElapsedTime();
+    private ActiveLocation activeLocation = null;
     //final double mecanumWheelCircumference = Math.PI*3.5; // note that this is slightly lower, adjusting for rolling w/ slipping
 
     DcMotor frontRightMotor = null;
@@ -21,7 +22,9 @@ public class BasicAuton extends LinearOpMode {
 
     @Override
     public void runOpMode() {
+
         hwMap = new FireHardwareMap(this.hardwareMap);
+        activeLocation = new ActiveLocation(hwMap);
         frontRightMotor = hwMap.frontRightMotor;
         frontLeftMotor = hwMap.frontLeftMotor;
         backRightMotor = hwMap.backRightMotor;
@@ -54,12 +57,13 @@ public class BasicAuton extends LinearOpMode {
 
         // drive forward 4.2 tiles
 
-        rotate(7, true);
+        rotate(5, true);
 
 
 
         while (opModeIsActive() && frontLeftMotor.isBusy()) {
             telemetry.addData("Version: ", "Auton 1.4");
+            telemetry.addData("IMU: ", activeLocation.getTrimmedAngleInDegrees());
             telemetry.addData("Current frontLeftMotor Encoder Position: ", frontLeftMotor.getCurrentPosition());
             telemetry.addData("frontLeftMotor Operational: ", frontLeftMotor.isBusy());
             telemetry.addData("Current frontRightMotor Encoder Position: ", frontRightMotor.getCurrentPosition());
@@ -78,12 +82,13 @@ public class BasicAuton extends LinearOpMode {
 
         mechanismMotor.setPower(0);
 
-     drive(4.65, 1000,true);
+     drive(4.3, 1000,true);
 
 
 
         while (opModeIsActive() && frontLeftMotor.isBusy()) {
             telemetry.addData("Version: ", "Auton 1.4");
+            telemetry.addData("IMU: ", activeLocation.getTrimmedAngleInDegrees());
             telemetry.addData("Current frontLeftMotor Encoder Position: ", frontLeftMotor.getCurrentPosition());
             telemetry.addData("frontLeftMotor Operational: ", frontLeftMotor.isBusy());
             telemetry.addData("Current frontRightMotor Encoder Position: ", frontRightMotor.getCurrentPosition());
@@ -104,13 +109,14 @@ public class BasicAuton extends LinearOpMode {
         mechanismMotor.setPower(0);
 
         // strafe right (will make method later)
-        rotate(85, true);
+        rotate(85-activeLocation.getTrimmedAngleInDegrees(), true);
        //drive(2);
         //strafe(4.5, true);
 
         // debug
         while (opModeIsActive() && frontLeftMotor.isBusy()) {
             telemetry.addData("Version: ", "Auton 1.4");
+            telemetry.addData("IMU: ", activeLocation.getTrimmedAngleInDegrees());
             telemetry.addData("Current frontLeftMotor Encoder Position: ", frontLeftMotor.getCurrentPosition());
             telemetry.addData("frontLeftMotor Operational: ", frontLeftMotor.isBusy());
             telemetry.addData("Current frontRightMotor Encoder Position: ", frontRightMotor.getCurrentPosition());
@@ -132,11 +138,12 @@ public class BasicAuton extends LinearOpMode {
 
 
         // move forward
-       drive(3,0,true);
+       drive(2.75,0,true);
 
         // debug
         while (opModeIsActive() && frontLeftMotor.isBusy()) {
             telemetry.addData("Version: ", "Auton 1.4");
+            telemetry.addData("IMU: ", activeLocation.getTrimmedAngleInDegrees());
             telemetry.addData("Current frontLeftMotor Encoder Position: ", frontLeftMotor.getCurrentPosition());
             telemetry.addData("frontLeftMotor Operational: ", frontLeftMotor.isBusy());
             telemetry.addData("Current frontRightMotor Encoder Position: ", frontRightMotor.getCurrentPosition());
@@ -165,6 +172,7 @@ public class BasicAuton extends LinearOpMode {
 
         while (opModeIsActive() && mechanismMotor.isBusy()) {
             telemetry.addData("Version: ", "Auton 1.4");
+            telemetry.addData("IMU: ", activeLocation.getTrimmedAngleInDegrees());
             telemetry.addData("Current frontLeftMotor Encoder Position: ", frontLeftMotor.getCurrentPosition());
             telemetry.addData("frontLeftMotor Operational: ", frontLeftMotor.isBusy());
             telemetry.addData("Current frontRightMotor Encoder Position: ", frontRightMotor.getCurrentPosition());
@@ -184,12 +192,13 @@ public class BasicAuton extends LinearOpMode {
 
         mechanismMotor.setPower(0);
 
-        strafe(1.2, true);
+        strafe(1.3, true);
 
 
 
         while (opModeIsActive() && frontLeftMotor.isBusy()) {
             telemetry.addData("Version: ", "Auton 1.4");
+            telemetry.addData("IMU: ", activeLocation.getTrimmedAngleInDegrees());
             telemetry.addData("Current frontLeftMotor Encoder Position: ", frontLeftMotor.getCurrentPosition());
             telemetry.addData("frontLeftMotor Operational: ", frontLeftMotor.isBusy());
             telemetry.addData("Current frontRightMotor Encoder Position: ", frontRightMotor.getCurrentPosition());
@@ -215,6 +224,7 @@ public class BasicAuton extends LinearOpMode {
 
         while (opModeIsActive() && frontLeftMotor.isBusy()) {
             telemetry.addData("Version: ", "Auton 1.4");
+            telemetry.addData("IMU: ", activeLocation.getTrimmedAngleInDegrees());
             telemetry.addData("Current frontLeftMotor Encoder Position: ", frontLeftMotor.getCurrentPosition());
             telemetry.addData("frontLeftMotor Operational: ", frontLeftMotor.isBusy());
             telemetry.addData("Current frontRightMotor Encoder Position: ", frontRightMotor.getCurrentPosition());

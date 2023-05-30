@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsTouchSensor;
+import com.qualcomm.hardware.rev.Rev2mDistanceSensor;
 import com.qualcomm.hardware.rev.RevTouchSensor;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.hardware.bosch.BNO055IMU;
@@ -24,7 +25,7 @@ public class FireHardwareMap {
 
     //public TouchSensor touch = null;
     public RevBlinkinLedDriver led = null;
-    public TouchSensor touch = null;
+    public RevTouchSensor touch = null;
 
     //Hardware Map object
     com.qualcomm.robotcore.hardware.HardwareMap HardwareMap = null;
