@@ -277,7 +277,7 @@ public class BasicAuton extends LinearOpMode {
         drive(-0.3, -1000,false,false);
 
 
-
+//:))
 
         while (opModeIsActive() && frontLeftMotor.isBusy()) {
             telemetry.addData("Version: ", "Auton 1.4");
