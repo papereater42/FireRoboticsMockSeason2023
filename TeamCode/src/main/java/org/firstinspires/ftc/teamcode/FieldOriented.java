@@ -93,10 +93,10 @@ public class FieldOriented extends LinearOpMode {
                 backRightPower /= 1.8;
             }
             if(axial2 < 0){
-                robot.mechanismMotor.setPower(-0.75);
+                robot.mechanismMotor.setPower(axial2/0.5);
             }
             else {
-                robot.mechanismMotor.setPower(axial1);
+                robot.mechanismMotor.setPower(axial1/0.9);
             }
             if(robot.touch.isPressed()){
                 robot.led.setPattern(RevBlinkinLedDriver.BlinkinPattern.GREEN);
